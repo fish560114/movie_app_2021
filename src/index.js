@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -10,8 +8,9 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+/*html의 root부분에 app을 렌더링 하는 것. 
+react는 소스코드에 처음부터 html을 넣지 않고,
+html에서 html 부분을 추가하거나 제거한다
+빈 html을 불러오고 react가 그안에 컴포넌트를 집어넣음
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+버츄얼 DOM(document object model)을 만들어내는 것임*/
