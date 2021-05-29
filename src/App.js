@@ -1,35 +1,52 @@
 import React from 'react'
+import Proptypes from 'prop-types'
 
-function Movie( {name,image} ){  
+function Movie( {name,image,rating} ){  
   return( <div>
             <h1> { name }</h1>
+            <h4>{rating}/5.0</h4>
             <img src = {image} alt={name} />
           </div>
   );
 }
+
+
+
 /* 아래에서 movie에 props들을 전달하게 된다.
  movie 함수의 아규먼트로 모두 가져온다.*/
  
  /*동적데이터 가져오기
  API에서 무비리스트에 데이터를 가져왔다고 가정 */
 
- /*
+ /* props를 전달하면서 올바르게 전달되었는지
+ props 타입을 확인한다. 
   */
+ Movie.propTypes = {
+  name: Proptypes.string.isRequired,
+  image: Proptypes.string.isRequired,
+  rating: Proptypes.number.isRequired
+}
+/*2-4강 기준 prop타입 검사에서 rating은 float으로 주어졌는데
+검사를 string으로 해서 동작은 이상이 없지만 웹 콘솔을 보면 
+워닝이 뜬다. 기대한 prop의 타입이 맞지 않는다고 */
 const MovieList = [
     {
       id: 1,
       name : "FF9",
-      image : "https://www.bing.com/images/search?view=detailV2&ccid=yG1lVvQa&id=27B044CA6E5D1A817EAB77404977940A31F5B3BB&thid=OIP.yG1lVvQaFZyJHI4s5ENrLQHaD4&mediaurl=https%3a%2f%2fup-template.azureedge.net%2f_FileData%2fM0302%2f202003%2f17%2ff715b27081aa07208ec742492fb359ab.jpg&exph=630&expw=1200&q=%eb%b6%84%eb%85%b8%ec%9d%98+%ec%a7%88%ec%a3%bc+%ec%96%bc%ed%8b%b0%eb%a9%94%ec%9d%b4%ed%8a%b8&simid=607991159604316224&ck=D94B68A01A76554FF8612C2291204FE1&selectedIndex=0&FORM=IRPRST"
+      image : "https://www.bing.com/images/search?view=detailV2&ccid=yG1lVvQa&id=27B044CA6E5D1A817EAB77404977940A31F5B3BB&thid=OIP.yG1lVvQaFZyJHI4s5ENrLQHaD4&mediaurl=https%3a%2f%2fup-template.azureedge.net%2f_FileData%2fM0302%2f202003%2f17%2ff715b27081aa07208ec742492fb359ab.jpg&exph=630&expw=1200&q=%eb%b6%84%eb%85%b8%ec%9d%98+%ec%a7%88%ec%a3%bc+%ec%96%bc%ed%8b%b0%eb%a9%94%ec%9d%b4%ed%8a%b8&simid=607991159604316224&ck=D94B68A01A76554FF8612C2291204FE1&selectedIndex=0&FORM=IRPRST",
+      rating : 5
     },
     {
       id: 2,
       name : "크루엘라",
-      image : "https://www.bing.com/images/search?view=detailV2&ccid=Y%2bcGCAB9&id=D3C86F3D6EABE813B38DEBF95428050D7906E791&thid=OIF.9fQHEiIv9SQ7BKuPxLBv7w&mediaurl=https%3a%2f%2fpds.joins.com%2fnews%2fcomponent%2fhtmlphoto_mmdata%2f202105%2f27%2ffa9ad18b-11ad-420b-8e55-7de2dc3ccc1f.jpg&exph=798&expw=560&q=%ed%81%ac%eb%a3%a8%ec%97%98%eb%9d%bc&simid=219166805694&ck=F5F40712222FF5243B04AB8FC4B06FEF&selectedIndex=0&FORM=IRPRST"
+      image : "https://www.bing.com/images/search?view=detailV2&ccid=Y%2bcGCAB9&id=D3C86F3D6EABE813B38DEBF95428050D7906E791&thid=OIF.9fQHEiIv9SQ7BKuPxLBv7w&mediaurl=https%3a%2f%2fpds.joins.com%2fnews%2fcomponent%2fhtmlphoto_mmdata%2f202105%2f27%2ffa9ad18b-11ad-420b-8e55-7de2dc3ccc1f.jpg&exph=798&expw=560&q=%ed%81%ac%eb%a3%a8%ec%97%98%eb%9d%bc&simid=219166805694&ck=F5F40712222FF5243B04AB8FC4B06FEF&selectedIndex=0&FORM=IRPRST",
+      rating : 4.9
     },
     {
       id: 3,
       name : "the spy",
-      image : "https://www.bing.com/images/search?view=detailV2&ccid=rarXk4Vl&id=0220EEC484E23B76250EF74000524458D00E0D25&thid=OIF.5Z3aEHYa095rHqLJoVAHAw&mediaurl=https%3a%2f%2fi.ytimg.com%2fvi%2fK7roTitsmiw%2fmaxresdefault.jpg&exph=720&expw=1280&q=%eb%8d%94+%ec%8a%a4%ed%8c%8c%ec%9d%b4&simid=81726944725&ck=E59DDA10761AD3DE6B1EA2C9A1500703&selectedIndex=1&FORM=IRPRST"
+      image : "https://www.bing.com/images/search?view=detailV2&ccid=rarXk4Vl&id=0220EEC484E23B76250EF74000524458D00E0D25&thid=OIF.5Z3aEHYa095rHqLJoVAHAw&mediaurl=https%3a%2f%2fi.ytimg.com%2fvi%2fK7roTitsmiw%2fmaxresdefault.jpg&exph=720&expw=1280&q=%eb%8d%94+%ec%8a%a4%ed%8c%8c%ec%9d%b4&simid=81726944725&ck=E59DDA10761AD3DE6B1EA2C9A1500703&selectedIndex=1&FORM=IRPRST",
+      rating : 4.8
     }
 ]
 
@@ -57,7 +74,8 @@ function App() {
       <Movie 
       key = {info.id} 
       name={info.name} 
-      image={info.image}/>  )}
+      image={info.image}
+      rating={info.rating}/>  )}
      
       {/*각각의 리스트안의 차일드는 유니크한 키 프로퍼티
       가 필요하다는 에러가 발생 
