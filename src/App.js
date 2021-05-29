@@ -3,7 +3,7 @@ import React from 'react'
 function Movie( {name,image} ){  
   return( <div>
             <h1> { name }</h1>
-            <img src = {image}/>
+            <img src = {image} alt={name} />
           </div>
   );
 }
@@ -13,6 +13,8 @@ function Movie( {name,image} ){
  /*동적데이터 가져오기
  API에서 무비리스트에 데이터를 가져왔다고 가정 */
 
+ /*
+  */
 const MovieList = [
     {
       id: 1,
@@ -52,12 +54,33 @@ function App() {
     그 실행결과 배열을 리턴해 준다.
     */}
     {MovieList.map(info => 
-      <Movie name={info.name} image={info.image}/>  )}
+      <Movie 
+      key = {info.id} 
+      name={info.name} 
+      image={info.image}/>  )}
      
       {/*각각의 리스트안의 차일드는 유니크한 키 프로퍼티
       가 필요하다는 에러가 발생 
       모든 리액트의 요소는 유일해야하지만,
-      리스트에 집어넣으면 유일해지지 않는다?*/}
+      리스트에 집어넣으면 유일해지지 않는다?
+      다른 이름, 사진등을 보유해도 리스트내의 아이템들의
+      고유성을 리액트가 식별하지 못하는 에러
+      키 prop을 입력하는 것으로 해결
+      그러나 movie로 전달되지는 않고, 리액트가 자체적으로 사용
+ 
+      from 영일님.
+      이름도 가능하긴하지만 숫자가 더 좋죠 아무래도
+      보통 그런경우 map()이라는 함수를 많이 사용하게되는데
+      어떠한 데이터가 모여있는 리스트가 있으면
+      그 인덱스를 구별하기 위한 키값으로 사용하면 됩니다.
+      그리고 키값도  컴포넌트에 전달하기 때문에
+      다른 props처럼 활용해서 쓸수있어요
+      아마 퀴즐렛 만들때 랜덤한 문제를 만들려면 
+      그 키값을 사용해야하는 상황도 나올거같네여
+
+      정리 : 키값을 다른 prop을 활용할 수 있지만
+      index정리를 위해서 숫자를 사용한다
+      */}
     {/*
       {console.log(MovieList.map(renderMovie))}
       {MovieList.map(renderMovie)}
