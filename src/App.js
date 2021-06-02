@@ -1,6 +1,43 @@
-import React from 'react'
-import Proptypes from 'prop-types'
+import React from "react";
+import axios from "axios";
+import Movie from "./movie"
 
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () => {
+    const { 
+      data :{  
+        data : { movies }
+      }
+    } = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating");
+    //console.log(movies.data.data.movies);
+    console.log(movies);
+    this.setState({movies, isLoading: false})
+  };
+  componentDidMount() {
+    this.getMovies();
+  }
+  render() {
+    const { isLoading, movies } = this.state;
+    return <div>{isLoading ? "Loading..." : movies.map(movie =>{
+      console.log(movie);
+      return <Movie 
+      id={movie.id} 
+      year={movie.year}
+      title={movie.title} 
+      summary={movie.summary} 
+      poster={movie.medium_cover_image}/>
+    })}</div>;
+  }
+}
+
+export default App;
+
+
+/*
 function Movie( {name,image,rating} ){  
   return( <div>
             <h1> { name }</h1>
@@ -20,7 +57,7 @@ function Movie( {name,image,rating} ){
 
  /* props를 전달하면서 올바르게 전달되었는지
  props 타입을 확인한다. 
-  */
+
  Movie.propTypes = {
   name: Proptypes.string.isRequired,
   image: Proptypes.string.isRequired,
@@ -28,7 +65,7 @@ function Movie( {name,image,rating} ){
 }
 /*2-4강 기준 prop타입 검사에서 rating은 float으로 주어졌는데
 검사를 string으로 해서 동작은 이상이 없지만 웹 콘솔을 보면 
-워닝이 뜬다. 기대한 prop의 타입이 맞지 않는다고 */
+워닝이 뜬다. 기대한 prop의 타입이 맞지 않는다고 
 const MovieList = [
     {
       id: 1,
@@ -58,19 +95,19 @@ function renderMovie(info){
 function App() {
   return ( <div className="App">
 
-    {/*자식 컴포넌트에 데이터 전달하기
+    /*자식 컴포넌트에 데이터 전달하기
     <Movie 
     name = "FF9"
     day = "5월 29일"
     actors = {['vin', 'john']}/> 
     무비 컴포넌트에 FF9이라는 value로 prop name을 주었다
-    그 외에도 prop은 다수 보내줄 수 있다.*/ }
+    그 외에도 prop은 다수 보내줄 수 있다.*/ 
 
-    {/*자바스크립트의 map을 이용하기
+    /*자바스크립트의 map을 이용하기
     map은 배열의 각 item을 입력으로 해서 함수를 실행
     그 실행결과 배열을 리턴해 준다.
-    */}
-    {MovieList.map(info => 
+    */
+    /*{MovieList.map(info => 
       <Movie 
       key = {info.id} 
       name={info.name} 
@@ -98,16 +135,15 @@ function App() {
 
       정리 : 키값을 다른 prop을 활용할 수 있지만
       index정리를 위해서 숫자를 사용한다
-      */}
-    {/*
+      
+    /*
       {console.log(MovieList.map(renderMovie))}
       {MovieList.map(renderMovie)}
-     */}
+     
     </div>
   );
 }
-
-export default App;
+*/
 /*
 APP이라는 컴포넌트는
 그안에 작성된 HTML을 반환한다.
